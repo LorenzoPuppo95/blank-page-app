@@ -3,5 +3,5 @@ export interface Note {
     desc: string;
     creationDate: Date;
     modifyDate?: Date;
-    isSelected?: boolean;
+    isSelected: boolean;
 }

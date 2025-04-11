@@ -1,5 +1,6 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject , AfterViewInit } from '@angular/core';
 import { StorageService } from '../storage.service';
+import { Note } from '../note';
 
 @Component({
   selector: 'app-editor',
@@ -10,26 +11,25 @@ import { StorageService } from '../storage.service';
 
 export class EditorComponent {
   service = inject(StorageService);
-  // constructor() {
-  //   effect(() => {
-  //     const editorDiv = document.getElementById('editroia');
-  //     if (editorDiv) {
-  //       this.service.note.set(editorDiv.textContent!);
-  //       console.log('Editor content updated:', editorDiv.textContent!);
-  //       console.log(this.service.note());
-  //       // this.service.note.update(oldValue => oldValue + editorDiv.innerHTML)
-  //     }
-  //   });
-  // }
   ngAfterViewInit(): void {
     const editorDiv = document.getElementById('editroia');
     if (editorDiv) {
-      editorDiv.innerHTML = this.service.note();
+      editorDiv.innerHTML = this.service.note().desc;
       editorDiv.addEventListener('input', () => {
-        this.service.note.set(editorDiv.innerHTML);
-      });     
+        const updatedDesc = editorDiv.innerHTML;
+        this.service.note.update(note => ({ ...note, desc: updatedDesc }));
+      });
     } else {
       console.error('Editor div not found!');
+    }
+  }
+
+  startNewNote(): void {
+    const newNote = this.service.createNewNote();
+    this.service.note.update(() => newNote);
+    const editorDiv = document.getElementById('editroia');
+    if (editorDiv) {
+      editorDiv.innerHTML = '';
     }
   }
 }
