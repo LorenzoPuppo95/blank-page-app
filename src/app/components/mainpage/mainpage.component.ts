@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EditorComponent } from "../../editor/editor.component";
+import { EditorComponent } from "../editor/editor.component";
 import { CommonModule } from '@angular/common';
 import { NoteListComponent } from "../note-list/note-list.component";
 import { StatListComponent } from "../stat-list/stat-list.component";

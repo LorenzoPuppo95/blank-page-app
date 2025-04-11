@@ -45,7 +45,6 @@ export class StorageService {
 
   createNewNote(): Note {
     const updatedNotes = this.notes().map(note => ({ ...note, isSelected: false }));
-
     const newNote: Note = {
       id: Date.now(),
       desc: '',
@@ -53,11 +52,9 @@ export class StorageService {
       modifyDate: new Date(),
       isSelected: true
     };
-
     updatedNotes.push(newNote);
     this.notes.set(updatedNotes);
     localStorage.setItem(this.localStorageKey, JSON.stringify(updatedNotes));
-
     return newNote;
   }
 }

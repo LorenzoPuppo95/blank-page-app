@@ -16,11 +16,7 @@ export class NoteListComponent implements OnInit {
   constructor(private storageService: StorageService) {
     effect(() => {
       console.log('Notes updated:', this.storageService.notes());
-      this.notes = this.storageService.notes().sort((a, b) => {
-        const dateA = new Date(a.modifyDate || a.creationDate).getTime();
-        const dateB = new Date(b.modifyDate || b.creationDate).getTime();
-        return dateB - dateA;
-      });
+      this.loadNotes();
     });
   }
 

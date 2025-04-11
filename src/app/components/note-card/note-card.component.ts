@@ -43,7 +43,7 @@ export class NoteCardComponent {
     return truncated.length > 50 ? truncated.slice(0, 50) + '...' : truncated;
   }
 
-  selectNote(): void {
-    this.storageService.note.set(this.note);
-  }
+  // selectNote(): void {
+  //   this.storageService.note.set(this.note);
+  // }
 }

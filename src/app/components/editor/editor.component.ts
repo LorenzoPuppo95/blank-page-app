@@ -1,6 +1,5 @@
 import { Component, inject , AfterViewInit } from '@angular/core';
-import { StorageService } from '../storage.service';
-import { Note } from '../note';
+import { StorageService } from '../../storage.service';
 
 @Component({
   selector: 'app-editor',
