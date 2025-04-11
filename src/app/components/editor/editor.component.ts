@@ -8,7 +8,7 @@ import { StorageService } from '../../storage.service';
   styleUrl: './editor.component.scss'
 })
 
-export class EditorComponent {
+export class EditorComponent implements AfterViewInit {
   service = inject(StorageService);
   ngAfterViewInit(): void {
     const editorDiv = document.getElementById('editroia');

@@ -1,11 +1,11 @@
-<div class="note-card">
-    <h3>{{ getTruncatedDescription(note.desc) }}</h3>
-    <p><strong>Created:</strong> {{ getFormattedDate(note.creationDate) }}</p>
-    <p *ngIf="note.modifyDate"><strong>Modified:</strong> {{ getFormattedDate(note.modifyDate) }}</p>
-</div>
-
-<!-- <div class="note-card" (click)="selectNote()">
+<!-- <div class="note-card">
     <h3>{{ getTruncatedDescription(note.desc) }}</h3>
     <p><strong>Created:</strong> {{ getFormattedDate(note.creationDate) }}</p>
     <p *ngIf="note.modifyDate"><strong>Modified:</strong> {{ getFormattedDate(note.modifyDate) }}</p>
 </div> -->
+
+<div class="note-card" (click)="selectNote()">
+    <h3>{{ getTruncatedDescription(note.desc) }}</h3>
+    <p><strong>Created:</strong> {{ getFormattedDate(note.creationDate) }}</p>
+    <p *ngIf="note.modifyDate"><strong>Modified:</strong> {{ getFormattedDate(note.modifyDate) }}</p>
+</div>
