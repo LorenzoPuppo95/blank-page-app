@@ -13,9 +13,9 @@ export class EditorComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const editorDiv = document.getElementById('editroia');
     if (editorDiv) {
-      editorDiv.innerHTML = this.service.note().desc;
+      editorDiv.innerText = this.service.note().desc;
       editorDiv.addEventListener('input', () => {
-        const updatedDesc = editorDiv.innerHTML;
+        const updatedDesc = editorDiv.innerText;
         this.service.note.update(note => ({ ...note, desc: updatedDesc }));
       });
     } else {
@@ -28,7 +28,7 @@ export class EditorComponent implements AfterViewInit {
     this.service.note.update(() => newNote);
     const editorDiv = document.getElementById('editroia');
     if (editorDiv) {
-      editorDiv.innerHTML = '';
+      editorDiv.innerText = '';
     }
   }
 }
