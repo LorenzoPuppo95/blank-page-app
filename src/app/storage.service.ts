@@ -57,4 +57,27 @@ export class StorageService {
     localStorage.setItem(this.localStorageKey, JSON.stringify(updatedNotes));
     return newNote;
   }
+
+  downloadCurrentNoteAsTxt() {
+    const currentNote = this.note();
+    if (!currentNote) {
+      alert("No note selected to download.");
+      return;
+    }
+  
+    const noteContent = currentNote.desc;
+    const noteTitle = `Note_${currentNote.id}.txt`;
+
+    const blob = new Blob([noteContent], { type: 'text/plain' });
+  
+    const anchor = document.createElement('a');
+    anchor.href = URL.createObjectURL(blob);
+    anchor.download = noteTitle;
+  
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  
+    console.log(`Downloaded: ${noteTitle}`);
+  }
 }

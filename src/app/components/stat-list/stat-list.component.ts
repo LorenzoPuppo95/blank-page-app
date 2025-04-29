@@ -1,36 +1,34 @@
-import { Component, Signal, signal, effect, OnInit, AfterViewInit } from '@angular/core';
-import { Note } from '../../note';
+import { Component, inject, effect } from '@angular/core';
+import { StorageService } from '../../storage.service';
 
 @Component({
   selector: 'app-stat-list',
-  imports: [],
   templateUrl: './stat-list.component.html',
   styleUrl: './stat-list.component.scss'
 })
-export class StatListComponent implements AfterViewInit{
+export class StatListComponent {
   characterCount: number = 0;
   wordCount: number = 0;
   noteCount: number = 0;
 
+  private service = inject(StorageService);
+
   constructor() {
-    this.updateStats();
-  }
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  updateStats(): void {
-    const notes: Note[] = JSON.parse(localStorage.getItem('notes') || '[]');
-    this.noteCount = notes.length;
-
-    const currentNote = notes.find((note: Note) => note.isSelected);
-
-    if (currentNote) {
-      this.characterCount = currentNote.desc.length;
-      this.wordCount = currentNote.desc.trim().split(/\s+/).length;
-    } else {
-      this.characterCount = 0;
-      this.wordCount = 0;
-    }
+    effect(() => {
+      const currentNote = this.service.note();
+      if (currentNote) {
+        const text = currentNote.desc || '';
+        this.characterCount = text.length;
+        this.wordCount = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+      } else {
+        this.characterCount = 0;
+        this.wordCount = 0;
+      }
+    });
+  
+    effect(() => {
+      const notes = this.service.notes();
+      this.noteCount = notes.length;
+    });
   }
 }

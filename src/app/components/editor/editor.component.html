@@ -1,4 +1,9 @@
 <div>
     <button (click)="startNewNote()">Add New Note</button>
+    <button (click)="service.downloadCurrentNoteAsTxt()" mat-icon-button class="example-icon"
+        aria-label="Example icon-button with menu icon">
+        Download Txt
+    </button>
 </div>
+
 <div id="editroia" contenteditable="true" class="editroia"></div>
